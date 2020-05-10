@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import MainNavBar from '../MainNavbar'
 import MainFooter from '../Mainfooter'
 import api from '../../api'
+import { Card, Button, CardTitle, CardText } from 'reactstrap'
 
 export default class ManageAppointment extends Component {
   constructor(props) {
@@ -28,7 +29,32 @@ export default class ManageAppointment extends Component {
   }
 
   render() {
-    return <div className="ManageAppointment"></div>
+    return (
+      <div className="ManageAppointment">
+        <MainNavBar canGoBack>My Appointments</MainNavBar>
+        {this.state.appointments.map((appointment) => (
+          <div key={appointment._id}>
+            <Card body>
+              <CardTitle>
+                <strong>Therapist: </strong> {appointment._therapist.name}
+              </CardTitle>
+              <CardText>
+                <strong>Date: </strong>
+                {new Date(appointment.date)
+                  .toLocaleString('pt-PT')
+                  .substr(0, 10)}{' '}
+                | <strong>Time: </strong>
+                {this.convertToReadbleHour(appointment.hourAndMinutes)}
+              </CardText>
+              <Button onClick={() => this.deleteAppointment(appointment._id)}>
+                Delete
+              </Button>
+            </Card>
+          </div>
+        ))}
+        <MainFooter />
+      </div>
+    )
   }
 
   componentDidMount() {
