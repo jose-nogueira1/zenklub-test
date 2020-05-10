@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import api from '../../api'
 
 export default class Login extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      username: '',
+      email: '',
       password: '',
       message: null,
     }
@@ -21,41 +22,15 @@ export default class Login extends Component {
   handleClick(e) {
     e.preventDefault()
     api
-      .login(this.state.username, this.state.password)
-      .then(result => {
+      .login(this.state.email, this.state.password)
+      .then((result) => {
         console.log('SUCCESS!')
         this.props.history.push('/') // Redirect to the home page
       })
-      .catch(err => this.setState({ message: err.toString() }))
+      .catch((err) => this.setState({ message: err.toString() }))
   }
 
   render() {
-    return (
-      <div className="Login">
-        <h2>Login</h2>
-        <form>
-          Username:{' '}
-          <input
-            type="text"
-            value={this.state.username}
-            name="username"
-            onChange={this.handleInputChange}
-          />{' '}
-          <br />
-          Password:{' '}
-          <input
-            type="password"
-            value={this.state.password}
-            name="password"
-            onChange={this.handleInputChange}
-          />{' '}
-          <br />
-          <button onClick={e => this.handleClick(e)}>Login</button>
-        </form>
-        {this.state.message && (
-          <div className="info info-danger">{this.state.message}</div>
-        )}
-      </div>
-    )
+    return <div className="Login"></div>
   }
 }
