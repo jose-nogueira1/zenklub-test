@@ -13,8 +13,30 @@ export default class Home extends Component {
     }
   }
 
+  therapists(therapists) {
+    for (let i = 0; i < therapists.length; i++) {
+      return (
+        <div className="therapist">
+          <img src={therapists[i].logo} alt="" />
+          <div className="therapistInfo">
+            {therapists[i].name} <br />
+            {therapists[i].type} | {therapists[i].location} <br />€
+            {therapists[i].price} / 50 minutes <br />
+            <Link to={`/therapist/${therapists[i]._id}`}>Check Therapist</Link>
+          </div>
+        </div>
+      )
+    }
+  }
+
   render() {
-    return <div className="home"></div>
+    return (
+      <div className="home">
+        <MainNavBar>Zenklub Express</MainNavBar>
+        <div className="mainSection">{this.therapists}</div>
+        <MainFooter />
+      </div>
+    )
   }
 
   componentDidMount() {

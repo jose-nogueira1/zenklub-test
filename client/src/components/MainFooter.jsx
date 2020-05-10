@@ -14,6 +14,32 @@ export default class MainFooter extends React.Component {
   }
 
   render() {
-    return <div className="footer"></div>
+    return (
+      <div className="footer">
+        {api.isLoggedIn() && (
+          <Link to="/appointments">
+            <img src="/img/calendar.png" alt="" />
+          </Link>
+        )}
+        {api.isLoggedIn() && (
+          <Link to="/therapist">
+            <img src="/img/add.png" alt="" />
+          </Link>
+        )}
+        <Link to="/">
+          <img src="/img/home.png" alt="" />
+        </Link>
+        {!api.isLoggedIn() && (
+          <Link to="/login">
+            <img src="/img/login.png" alt="" />
+          </Link>
+        )}
+        {api.isLoggedIn() && (
+          <Link to="/" onClick={(e) => this.handleLogoutClick(e)}>
+            <img src="/img/logout.png" alt="" />
+          </Link>
+        )}
+      </div>
+    )
   }
 }

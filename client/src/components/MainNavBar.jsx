@@ -17,6 +17,12 @@ export default class MainNavbar extends React.Component {
   }
 
   render() {
-    return <div className="navBar"></div>
+    return (
+      <div className="navBar">
+        <nav>
+          <h1>{this.props.children}</h1>
+        </nav>
+      </div>
+    )
   }
 }
